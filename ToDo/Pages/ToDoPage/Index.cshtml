@@ -1,0 +1,62 @@
+﻿@page
+@model ToDo.Pages.ToDoPage.IndexModel
+
+<div class="container">
+    <div class="row pt-4 pb-3">
+        <div class="col-6">
+            <h2 class="text-primary">ToDo List</h2>
+        </div>
+        <div class="col-6 text-end">
+            <a asp-page="/todopage/create" class="btn btn-primary">
+                <i class="bi bi-plus-circle"></i>Create a new task
+            </a>
+        </div>
+    </div>
+</div>
+<table class="table table-boredered table-striped">
+    <thead>
+        <tr>
+            <th>
+                Title
+            </th>
+            <th>
+               Description
+            </th>
+            <th>
+                Due Date
+            </th>
+            <th>
+                Completed
+            </th>
+            <th>
+                Priority
+            </th>
+        </tr>
+
+    </thead>
+    <tbody>
+        @foreach (var obj in Model.ToDoList.OrderBy(u => (int)u.Priority))
+        {
+            <tr>
+                <td>@obj.Title</td>
+                <td>@obj.Description</td>
+                <td>@obj.DueDate</td>
+                <td>@(obj.IsCompleted ? "Yes" : "No")</td>
+                <td>@obj.Priority</td>
+                <td>
+                    <div class="w-75 btn-group" role="group">
+                        <a asp-page="todopage/edit" asp-route-id="@obj.Id" class="btn btn-primary mx-2">
+                            <i class="bi bi-pencil-square"></i>Edit
+                        </a>
+                        <a asp-page="todopage/delete" asp-route-id="@obj.Id" class="btn btn-danger mx-2">
+                            <i class="bi bi-trash-fill"></i>Delete
+                        </a>
+                    </div>
+                </td>
+            </tr>
+        }
+    </tbody>
+
+
+
+</table>
