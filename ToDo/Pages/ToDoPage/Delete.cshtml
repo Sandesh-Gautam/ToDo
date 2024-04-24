@@ -1,4 +1,62 @@
 ﻿@page
 @model ToDo.Pages.ToDoPage.DeleteModel
-@{
+
+<form method="post">
+    <div class="border p-3 mt-4">
+        <div class="row pb-2">
+            <h2 class="text-primary">Delete To-Do List</h2>
+            <hr />
+        </div>
+        <!-- Id -->
+        <input asp-for="Todo.Id" type="hidden" />
+        <!-- Title -->
+        <div class="mb-3 row p-1">
+            <label asp-for="Todo.Title" class="p-0"></label>
+            <input asp-for="Todo.Title" class="form-control disabled" />
+            <span asp-validation-for="Todo.Title" class="text-danger"></span>
+        </div>
+        <!-- Description -->
+        <div class="mb-3 row p-1">
+            <label asp-for="Todo.Description" class="p-0"></label>
+            <textarea asp-for="Todo.Description" class="form-control disabled"></textarea>
+            <span asp-validation-for="Todo.Description" class="text-danger"></span>
+        </div>
+        <!-- Due Date -->
+        <div class="mb-3 row p-1">
+            <label asp-for="Todo.DueDate" class="p-0"></label>
+            <input asp-for="Todo.DueDate" type="datetime-local" class="form-control disabled" />
+            <span asp-validation-for="Todo.DueDate" class="text-danger"></span>
+        </div>
+        <!-- Is Completed (checkbox) -->
+        <div class="mb-3 form-check">
+            <input asp-for="Todo.IsCompleted" class="form-check-input" />
+            <label asp-for="Todo.IsCompleted" class="form-check-label disabled">Is Completed</label>
+            <span asp-validation-for="Todo.IsCompleted" class="text-danger"></span>
+        </div>
+        <!-- Priority -->
+        <div class="mb-3 row p-1">
+            <label asp-for="Todo.Priority" class="p-0"></label>
+            <select asp-for="Todo.Priority" class="form-control disabled">
+                <option value="Low">Low</option>
+                <option value="Medium">Medium</option>
+                <option value="High">High</option>
+            </select>
+            <span asp-validation-for="Todo.Priority" class="text-danger"></span>
+        </div>
+        <!-- Submit button -->
+        <div class="row">
+            <div class="col-6 col-md-3">
+                <button type="submit" class="btn btn-primary form-control">Delete</button>
+            </div>
+            <div class="col-6 col-md-3">
+                <a asp-page="/todopage/index" class="btn btn-outline-secondary border form-control">Back to List</a>
+            </div>
+        </div>
+    </div>
+</form>
+
+@section Scripts {
+    @{
+        <partial name="_ValidationScriptsPartial" />
+    }
 }
